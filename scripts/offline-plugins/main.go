@@ -57,7 +57,7 @@ func main() {
 }
 
 func Run(ctx context.Context, from, to string) error {
-	offline := NewOffline(plugins.KubegemsChartsRepoURL)
+	offline := NewOffline(plugins.GenKubeGemsChartsRepoURL())
 	if err := offline.ReadFromFile(ctx, from); err != nil {
 		return err
 	}

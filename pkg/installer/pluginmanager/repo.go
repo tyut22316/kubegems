@@ -126,14 +126,16 @@ func (p *PluginManager) parseBuiltInRepoIndex(ctx context.Context) Repository {
 	if p.builtinRepoCache != nil {
 		return *p.builtinRepoCache
 	}
+	address := plugins.GenKubeGemsChartsRepoURL()
 	repo := Repository{
 		Name:    "builtin",
-		Address: plugins.KubegemsChartsRepoURL, // cached repo use kubegems official repo address on deploy
-		Static:  true,                          // static repo can't be update after init.
+		Address: address, // cached repo use kubegems official repo address on deploy
+		//允许默认仓库更新
+		Static: false, // static repo can't be update after init.
 		// nolint: gomnd
 		Priority: 99, // lower priority
 	}
-	indexFile, err := helm.LoadIndex(ctx, bundle.PerRepoCacheDir(plugins.KubegemsChartsRepoURL, plugins.KubegemsPluginsCachePath))
+	indexFile, err := helm.LoadIndex(ctx, bundle.PerRepoCacheDir(address, plugins.KubegemsPluginsCachePath))
 	if err != nil {
 		log.FromContextOrDiscard(ctx).Error(err, "load builtin repo")
 	} else {

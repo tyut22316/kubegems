@@ -261,7 +261,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  address: aHR0cHM6Ly9jaGFydHMua3ViZWdlbXMuaW8va3ViZWdlbXM=
+  address: aHR0cDovLzE5Mi4xNjguMjM5LjExNzo3ODk5Lw==
   priority: PG5pbD4=
 kind: Secret
 metadata:
@@ -426,7 +426,9 @@ spec:
         env:
         - name: LOG_LEVEL
           value: debug
-        image: docker.io/kubegems/kubegems:v1.23.8
+        - name: ChartsRepoURL
+          value: "http://192.168.239.117:7899/"
+        image: cucloud/cucloud:v1.23.8
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 6

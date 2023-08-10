@@ -16,6 +16,7 @@ package pluginmanager
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"path/filepath"
@@ -143,6 +144,10 @@ func ParseInstallerObjects(path string, values GlobalValues, version string) ([]
 					"%s/%s/kubegems:%s", values.ImageRegistry, values.ImageRepository, version,
 				)
 				item.Spec.Template.Spec.Containers[i].Image = containerImage
+			}
+		case *corev1.Secret:
+			if len(item.Data) != 0 {
+				item.Data["address"] = []byte(base64.StdEncoding.EncodeToString([]byte(plugins.GenKubeGemsChartsRepoURL())))
 			}
 		}
 	}

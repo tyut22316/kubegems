@@ -8,15 +8,15 @@ metadata:
     plugins.kubegems.io/description: KubeGems global values.
 spec:
   kind: template
-  url: https://charts.kubegems.io/kubegems
+  url: http://192.168.239.117:7899/
   chart: global
   version: "1.0.0"
   values:
     clusterName: "manager-cluster"
     # choose 'registry.cn-beijing.aliyuncs.com' or 'docker.io'
-    imageRegistry: registry.cn-beijing.aliyuncs.com
+    imageRegistry: local
     imageRepository: "kubegems"
-    storageClass: local-path # change me to use a different storage class
+    storageClass: standard # change me to use a different storage class
     kubegemsVersion: v1.23.8
 ---
 apiVersion: plugins.kubegems.io/v1beta1
@@ -29,7 +29,7 @@ metadata:
     plugins.kubegems.io/description: KubeGems core service and dashboard.
 spec:
   kind: helm
-  url: https://charts.kubegems.io/kubegems
+  url: http://192.168.239.117:7899/
   installNamespace: kubegems
   version: 1.23.8
   valuesFrom:

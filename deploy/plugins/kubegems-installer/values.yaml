@@ -474,4 +474,4 @@ serviceAccount:
 ## @skip repositories
 repositories:
   - name: kubegems
-    address: https://charts.kubegems.io/kubegems
+    address: http://192.168.239.117:7899/

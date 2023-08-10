@@ -14,9 +14,12 @@
 
 package plugins
 
+import "os"
+
 const (
-	KubegemsChartsRepoURL    = "https://charts.kubegems.io/kubegems"
-	KubegemsPluginsCachePath = "plugins"
+	// KubegemsChartsRepoURL    = "https://charts.kubegems.io/kubegems"
+	DefaultKubegemsChartsRepoURL = "http://192.168.239.117:7899"
+	KubegemsPluginsCachePath     = "plugins"
 )
 
 const (
@@ -71,3 +74,13 @@ const (
 	KubeGemsNamespaceInstaller = "kubegems-installer"
 	KubeGemsNamespaceLocal     = "kubegems-local"
 )
+
+func GenKubeGemsChartsRepoURL() string {
+	val, ok := os.LookupEnv("ChartsRepoURL")
+	if ok {
+		//替换KubegemsChartsRepoURL
+		return val
+	} else {
+		return DefaultKubegemsChartsRepoURL
+	}
+}
