@@ -39,8 +39,9 @@ type Signer struct {
 
 func init() {
 	signer = &Signer{
-		Token:    token,
-		Duration: 10,
+		Token: token,
+		//延长时延误差
+		Duration: 60,
 	}
 }
 
